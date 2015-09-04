@@ -86,6 +86,21 @@ var gameObj = {
 		obj2.boxObj.domObj.className = 'row' + obj2.position[0] + ' ' + 'cell' + obj2.position[1] + ' ' + 'num' + obj2.boxObj.value;
 		obj1.boxObj = null;
 	},
-	
 
+	addTo:function(obj1, obj2){
+		obj2.boxObj.domObj.parentNode.removeChild(obj2.boxObj.domObj);
+		obj2.boxObj = obj1.boxObj;
+		obj1.boxObj = null;
+		obj2.boxObj.value = obj2.boxObj.value * 2;
+		obj2.boxObj.domObj.className = 'row' + obj2.position[0] + ' ' + 'cell' + obj2.position[1] + ' ' + 'num' + obj2.boxObj.value;
+		obj2.boxObj.domObj.innerText = obj2.boxObj.value;
+		obj2.boxObj.domObj.textContent = obj2.boxObj.value;
+		this.points.score+=obj2..boxObj.value;
+		var scoreBar = document.getElementById('score');
+		scoreBar.innerText = this.points.score;
+		scoreBar.textContent = this.points.score;
+		return obj2.boxObj.value;
+	},
+
+	
 }
