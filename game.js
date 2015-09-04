@@ -90,7 +90,8 @@ var gameObj = {
 	addTo:function(obj1, obj2){
 		obj2.boxObj.domObj.parentNode.removeChild(obj2.boxObj.domObj);
 		obj2.boxObj = obj1.boxObj;
-		obj1.boxObj = null;
+		ob
+		j1.boxObj = null;
 		obj2.boxObj.value = obj2.boxObj.value * 2;
 		obj2.boxObj.domObj.className = 'row' + obj2.position[0] + ' ' + 'cell' + obj2.position[1] + ' ' + 'num' + obj2.boxObj.value;
 		obj2.boxObj.domObj.innerText = obj2.boxObj.value;
@@ -102,5 +103,38 @@ var gameObj = {
 		return obj2.boxObj.value;
 	},
 
+	clear:function(x,y){
+		var can = 0;
+		for (var i = 0; i < 4; i++) {
+			var fst = null;
+			var fstEmpty = null;
+			for(var j = 0; j < 4; j++){
+				var objInThisWay=null;
+				switch(""+x+y){
+					case '00' : objInThisWay = this.stage[i][j];
+					break;
+					case '10' : objInThisWay = this.stage[j][i];
+					break;
+					case '11' : objInThisWay = this.stage[j-3][i];
+					break;
+					case '01' : objInThisWay = this.stage[i][3-j];
+					break;
+				}
+				if (objInThisWay.boxObj!=null) {
+					if (fstEmpty) {
+						this.moveTo(objInThisWay,fstEmpty)
+						fstEmpty=null;
+						j=0;
+						can=1;
+					}
+				}else if (!fstEmpty) {
+					fstEmpty=objInThisWay;
+				}
+			} 	
+		}
+		return can;
+	},
+
 	
+
 }
